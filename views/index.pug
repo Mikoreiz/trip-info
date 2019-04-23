@@ -6,7 +6,7 @@ head
     each one in route
           - var color = "#" + one.route_color
           - var url = one.route_url
-          a.card.m-2.d-flex.row.justify-content-center(href=''+url+'' style='width: 48rem; text-decoration: none !important; font-size:16px; background-color: #fdfeff; color:#525151; box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.15);')
+          a.card.m-2.d-flex.row.justify-content-center(href=''+url+'' style='width: 40rem; text-decoration: none !important; font-size:16px; background-color: #fdfeff; color:#525151; box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.15);')
            .card-body.row.justify-content-start
              h1.card-title.mr-1.ml-2.display-5.p-2(style='color:'+color+'; border: 1px solid '+color+'') #{one.route_id}
-             p.ml-4.mt-2.font-weight-light(style='text-align:left; font-size: 28px;') #{one.route_long_name}
+             p.ml-4.mt-2.font-weight-light(style='text-align:left; font-size: 24px;') #{one.route_long_name}
