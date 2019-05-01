@@ -1,0 +1,12 @@
+#routeCard {
+	width: 32rem;
+	text-decoration: none !important; 
+	font-size:16px; 
+	background-color: #fdfeff; 
+	color:black; 
+	box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.15);
+}
+
+
+
+

@@ -12,12 +12,19 @@ app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 //Models
 const routeRTD = require('./models/routes');
 const shapeRTD = require('./models/shapes');
 const stop_timeRTD = require('./models/stop_times');
 const stopRTD = require('./models/stops');
 const tripRTD = require('./models/trips');
+const pathRTD = require('./models/trippath');
 
 app.get('/route', function(request, response){
 	routeRTD.find({}, function(err, routes){
@@ -29,9 +36,19 @@ app.get('/route', function(request, response){
 	});
 });
 
-app.get('/trip-path', function(request, response){
+app.get('/trip-test/:route_id', function(request, response){
+	pathRTD.findOne({'route_id' : request.params.route_id}).exec(function(err, trips){
+		if (err) {
+			console.log('Could not fetch');
+		} else {
+			response.send(trips);
+		}
+	});	
+});
+
+app.get('/trip-path/:route_id', function(request, response){
 	tripRTD.aggregate([
-			{$match: {'route_id': '43'}},
+			{$match: {'route_id': '97'}},
 			{$lookup: {
 				from: 'shapes',
 				localField: 'shape_id',
@@ -98,6 +115,6 @@ app.get('/stoptimes', function(request, response){
 });
 
 
-app.listen(3000, function(){
-    console.log(`Running on port 3000...`);
+app.listen(3001, function(){
+    console.log(`Running on port 3001...`);
 });
