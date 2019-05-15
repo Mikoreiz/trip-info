@@ -8,6 +8,7 @@
     cd into project
     Must install required modules (use "npm install mongoose async csv await")
     Make sure you put each individual text file to "files_to_import" folder and not the whole gtfs folder
+    Go to config.js and change database to 'gtfs'
     Then enter "npm start" to import gtfs 
   #### 4. Once imported, go to the bin directory, enter cmd 'mongo' to run the shell (mongod must be running)
     enter 'show dbs' and then enter 'use (insert db name here)'
