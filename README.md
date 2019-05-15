@@ -2,9 +2,12 @@
 # Setting up MongoDB
   #### 1. Once you have mongodb installed, create the following folder:
        C:\data\db
-  #### 2. cd to "C:/Program Files\MongoDB\Server\4.0\bin>" and enter cmd ".\mongod" to run server
+  #### 2. cd to "C:/Program Files\MongoDB\Server\4.0\bin" and enter cmd ".\mongod" to run server
        (Mongo server must run everytime you run the project)
   #### 3. Import gtfs into mongodb using: [node-gtfs-to-mongodb](https://github.com/Flowlance/node-gtfs-to-mongodb)
+       cd into project
+       Must install required modules (use "npm install mongoose async csv await")
+       Then enter "npm start" to import gtfs 
   #### 4. Once imported, go to the bin directory, enter cmd 'mongo' to run the shell (mongod must be running)
        enter 'show dbs' and then enter 'use (insert db name here)'
        db.routes.find({}).pretty() to show all the routes
