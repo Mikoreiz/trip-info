@@ -5,7 +5,7 @@
   #### 2. cd to "C:\Program Files\MongoDB\Server\4.0\bin" and enter cmd ".\mongod" to run server
     (Mongo server must run everytime you run the project)
   #### 3. Import gtfs into mongodb using: [node-gtfs-to-mongodb](https://github.com/Flowlance/node-gtfs-to-mongodb)
-    cd into project
+    cd into node-gtfs-to-mongodb project
     Must install required modules (use "npm install mongoose async csv await")
     Make sure you put each individual text file to "files_to_import" folder and not the whole gtfs folder
     Go to config.js and change database to 'gtfs'
