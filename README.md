@@ -7,6 +7,7 @@
   #### 3. Import gtfs into mongodb using: [node-gtfs-to-mongodb](https://github.com/Flowlance/node-gtfs-to-mongodb)
        cd into project
        Must install required modules (use "npm install mongoose async csv await")
+       Make sure you put each individual text file to "files_to_import" folder and not the whole gtfs folder
        Then enter "npm start" to import gtfs 
   #### 4. Once imported, go to the bin directory, enter cmd 'mongo' to run the shell (mongod must be running)
        enter 'show dbs' and then enter 'use (insert db name here)'
@@ -19,4 +20,4 @@
 # Setting up Node.js
   #### 1. Once you have pulled from the repo, go to powershell and cd into project directory
   #### 2. Install the list of dependencies located in the package.json file. Use "npm install (dependency name)"
-  #### 3. 
+  #### 3. Then enter "node index.js" to run the server
