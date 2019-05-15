@@ -26,4 +26,4 @@
 # Setting up React
   #### 1. In your project directory enter "npm install create-react-app"
   #### 2. cd into client and install required dependencies 
-    "npm install react react-router-dom react-scripts whatwg-fetch"
+    "npm install react react-router-dom react-scripts whatwg-fetch leaflet react-leaflet styled-components"
