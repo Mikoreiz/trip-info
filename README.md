@@ -14,3 +14,6 @@
       db.routes.update({"route_id" : "93"}, {$set: {"route_url" : "http://sanjoaquinrtd.com/maps_and_schedules/PDF/93.pdf"}})
     
 # Setting up Node.js
+  #### 1. Once you have pulled from the repo, go to powershell and cd into project directory
+  #### 2. Install the list of dependencies located in the package.json file. Use "npm install (dependency name)"
+  #### 3. 
