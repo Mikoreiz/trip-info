@@ -8,7 +8,7 @@ class RTDtrip extends Component {
 		constructor(props) {
 		super(props);
 		
-		this.state = {trip:[]};
+		this.state = {trip:{}};
 		
 		this.loadData = this.loadData.bind(this);
 		this.tripList = this.tripList.bind(this);
@@ -19,18 +19,16 @@ class RTDtrip extends Component {
 	loadData = () => {
 		var self = this;
 		httpTrip.getTrips().then(data => {
-			self.setState({trip: data.conversations})
+			self.setState({trip: data})
 		}, err => {
 		
 		});
 	}
 	
 	tripList = () => {
-		const list = this.state.trip.map((trip) =>
-			<div className="row justify-content-center m-2">
-				<div className="col-md-6" key={trip.route_id}>
-					<Map trip={trip}/>
-				</div>
+		const list = this.state.trip((trip) =>
+			<div className="col-md-6" key={trip.route_id}>
+				<Map trip={trip}/>
 			</div>
 		);
 		return (list);
@@ -38,7 +36,6 @@ class RTDtrip extends Component {
 	render(){
 		return(
 			<div>
-				<Map />
 				{this.tripList()}
 			</div>
 		)

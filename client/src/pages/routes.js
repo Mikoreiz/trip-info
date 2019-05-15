@@ -27,7 +27,7 @@ class RTDroutes extends Component {
 	
 	routeList = () => {
 		const list = this.state.route.map((route) =>
-			<div className="row justify-content-center m-2">
+			<div className="justify-content-center m-2">
 			<div className="col-md-6" key={route._id}>
 				<Routes route={route}/>
 			</div>
@@ -38,8 +38,8 @@ class RTDroutes extends Component {
 	render(){
 		return (
 		<div>
-			<h1 className="row justify-content-center display-4 m-3 font-weight-bold">ROUTE</h1>
-			<div className="card-deck">
+			<h1 className="row justify-content-center display-4 m-3 font-weight-bold">ROUTES</h1>
+			<div className="card-deck row justify-content-center">
 				{this.routeList()}
 			</div>
 		</div>

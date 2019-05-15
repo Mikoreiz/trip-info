@@ -44,7 +44,6 @@ class Map extends Component {
 	render(){
 		return( 
 		<div className="row justify-content-center">
-			<p>{this.props.trip.trip_id}<p>
 			<Wrapper width="1280px" height="720px" id="map"/>
 		</div>
 		)
