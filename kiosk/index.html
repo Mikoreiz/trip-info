@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="dist/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="dist/assets/owl.theme.default.min.css">
+<script src="dist/vendors/jquery.min.js" type="text/javascript"></script>
+<script src="dist/owl.carousel.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+var clicked = false, clickY;
+$(document).on({
+    'mousemove': function(e) {
+        clicked && updateScrollPos(e);
+    },
+    'mousedown': function(e) {
+        clicked = true;
+        clickY = e.pageY;
+    },
+    'mouseup': function() {
+        clicked = false;
+        $('html').css('cursor', 'auto');
+    }
+});
+
+var updateScrollPos = function(e) {
+    $('html').css('cursor', 'row-resize');
+    $(window).scrollTop($(window).scrollTop() + (clickY - e.pageY));
+
+
+
+
+
+
+
+
+
+
+
+
+
+var clickedEl = document.getElementsByClassName("route");
+var limit = 5;
+var mouseMoved = false;
+
+function resetEvents() {
+    clickedEl.onmousemove = null;
+    clickedEl.ondragstart = null;
+    clickedEl.onmouseleave = null;
+    mouseMoved = false;
+}
+
+clickedEl.onmousedown = function (downEvent) {
+    if (clickedEl.attributes.href) {
+        clickedEl.onclick = function (clickEvent) {
+            if (mouseMoved) {
+                clickEvent.preventDefault();
+            }
+            resetEvents();
+        };
+    }
+    
+    clickedEl.onmouseleave = function () {
+        resetEvents();
+    };
+
+    clickedEl.onmousemove = function (moveEvent) {
+        // This prevents the text selection being dragged
+        clickedEl.ondragstart = function (dragEvent) {
+            dragEvent.preventDefault();
+        };
+
+        if (Math.abs(moveEvent.x - downEvent.x) >= limit || Math.abs(moveEvent.y - downEvent.y) >= limit) {
+            // If user clicks then moves the mouse within a certain limit, select the text inside
+            window.getSelection().selectAllChildren(clickedEl);
+            mouseMoved = true;
+        }
+    };
+
+};
+
+
+
+
+
+
+
+}
+
+
+
+
+
+</script>
+
+
+
+<style>
+/*    ::-webkit-scrollbar {
+  width: 200px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 50px grey; 
+  border-radius: 600px;
+}
+::-webkit-scrollbar-thumb {
+  background: maroon;
+  border-radius: 500px;
+}*/
+    body{
+        background-color: #e3e3e3;
+        -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+    }
+.grid-container {
+  display: grid;
+  grid-template-columns:  auto auto;
+  /* grid-template-rows: 150px 150px 150px 150px 150px 150px 150px 150px 150px 150px ; */
+  grid-gap: 10px;
+/*  background-color:maroon;*/
+  padding: 10px;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.grid-container > div {
+/*  background-color: #f7f7f7;*/
+ /* text-align: center;*/
+ /* border-radius: 1.25rem;*/
+  border: 1px solid gray;
+  box-shadow: 10px 10px 20px -5px rgba(0,0,0,0.15);
+  margin-left: 25px;
+  margin-right: 25px;
+
+
+}
+
+
+.inside-grid {
+    display: grid;
+    grid-template-columns: 100px auto;
+    background-color: white;
+}
+
+.inside-grid > div {
+  
+  
+
+
+
+}
+
+p {
+    margin-top: 10px;
+/*    font-size: 20px;
+*/    color: black;
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    margin-bottom: 0;
+    margin-left: 6px;
+}
+
+a {
+    text-decoration: none;
+    color:#7c0307;
+    user-drag: none;
+}
+
+* {
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: moz-none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.row {
+
+}
+
+.item1 {}
+
+.number {
+    margin-left: 30px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.description {
+    margin-left: 35px;
+    margin-top: 5px;
+    font-size: 20px;
+}
+
+
+.arrow {
+    height: auto; 
+    width: auto; 
+    max-width: 70px; 
+    max-height: 70px;
+
+
+}
+
+
+
+.arrow.hover {
+    background-color: red;
+}
+
+
+.leftarrow {
+    margin-right: 30px;
+}
+
+.rightarrow {
+    margin-left: 30px;
+}
+
+.owl-nav {
+    margin-top: 50px !important;
+}
+
+
+
+
+
+
+#overlay {
+  background-color:#000;
+  bottom:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
+  position:fixed;
+  right:0;
+  top:0;
+  transition:opacity .2s ease-in-out;
+  z-index:2;
+   
+}
+
+.away-msg {
+  color: white;
+  text-align: center;
+  margin-top:200px;
+}
+
+html.idle #overlay {
+  opacity:1;
+  transition:opacity 2s ease-in-out;
+}
+
+.explanation {
+  font-family:monospace;
+  left:50%;
+  line-height:1.5;
+  margin:0;
+  max-width:40em;
+  position:absolute;
+  top:50%;
+  transform:translate(-50%, -50%);
+}
+
+.blink_text {
+
+    animation:5s blinker linear infinite;
+    -webkit-animation:5s blinker linear infinite;
+    -moz-animation:5s blinker linear infinite;
+
+     color: white;
+    }
+
+    @-moz-keyframes blinker {  
+     0% { opacity: 1.0; }
+     50% { opacity: 0.0; }
+     100% { opacity: 1.0; }
+     }
+
+    @-webkit-keyframes blinker {  
+     0% { opacity: 1.0; }
+     50% { opacity: 0.0; }
+     100% { opacity: 1.0; }
+     }
+
+    @keyframes blinker {  
+     0% { opacity: 1.0; }
+     50% { opacity: 0.0; }
+     100% { opacity: 1.0; }
+     }
+
+
+
+
+
+
+
+
+</style>
+
+
+<script>
+
+(function() {
+  const interval = 1000;
+  const timeout = 30;
+  let idleCounter = 0;
+  window.onload = document.onmousemove = document.onkeypress = function() {
+    idleCounter = 0;
+    document.documentElement.classList.remove('idle');
+  };
+  window.setInterval(function() {
+    if (++idleCounter >= timeout) {
+      document.documentElement.classList.add('idle');
+      idleCounter = 0;
+    }
+  }, interval);
+})();
+</script>
+
+</head>
+<body>
+
+        <div id="overlay"><h1 class="away-msg blink_text">Touch screen or press any key to start.</h1></div>
+
+<div class="owl-carousel owl-theme">
+
+
+<div class="grid-container">
+  
+
+
+
+
+
+<div class="row route">
+        <a href="routes/r1.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #00BCE4 inset;">
+        <div class="number"><p style="color: #00BCE4">1</p></div>
+        <div class="description"><p>Metro Hopper - Northwest Stockton</p><p>Quail Lakes - March Lane - Malls</p>  </div>
+    </div>
+</a>
+</div>
+
+
+<div class="row route">
+        <a href="routes/r2.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #47AA42 inset;">
+        <div class="number"><p style="color: #47AA42">2</p></div>
+        <div class="description"><p>Metro Hopper - Northwest Stockton</p><p>Malls - Sutter Medical Center</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/r3.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #ffbd3d inset;">
+        <div class="number"><p style="color: #ffbd3d">3</p></div>
+        <div class="description"><p style="">Metro Hopper - North Stockton</p><p>Malls - Pacific - Hammertown</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/r4.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #d31145 inset;">
+        <div class="number"><p style="color: #D31145">4</p></div>
+        <div class="description"><p style="">Metro Hopper - Central Stockton</p><p>Malls - Pershing - Alpine - Courthouse</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/r5.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #ff6600 inset;">
+        <div class="number"><p style="color: #FF6600">5</p></div>
+        <div class="description"><p style="">Metro Hopper - Central Stockton</p><p>Eastland Plaza - DTC - Malls</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/r6.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #A54399 inset;">
+        <div class="number"><p style="color: #A54399">6</p></div>
+        <div class="description"><p style="">Metro Hopper - Northeast Stockton</p><p>Malls - March - Hammer</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/r7.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #0055A5 inset;">
+        <div class="number"><p style="color: #0055A5">7</p></div>
+        <div class="description"><p style="">Metro Hopper - South Stockton</p><p>DTC - Weston Ranch</p> </div>
+    </div>
+</a>
+</div>
+
+
+<div class="row route">
+        <a href="routes/r8.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #F06C9B inset;">
+        <div class="number"><p style="color: #F06C9B">8</p></div>
+        <div class="description"><p style="">Metro Hopper - Northeast Stockton</p><p>Malls - Shadow Lakes</p> </div>
+    </div>
+</a>
+</div>
+
+
+
+
+
+
+<div class="row route">
+        <a href="routes/r9.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #00AF91 inset;">
+        <div class="number"><p style="color: #00AF91">9</p></div>
+        <div class="description"><p style="">Metro Hopper - Southeast Stockton</p><p>Malls - Pacific - Holman</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/150.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #00FFFF inset;">
+        <div class="number"><p style="color: #00FFFF">150</p></div>
+        <div class="description"><p style="">Livermore/Dublin BART</p><p>DTC - Dublin/Pleasonton BART</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/173.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #98012E inset;">
+        <div class="number"><p style="color: #98012E">173</p></div>
+        <div class="description"><p style="">Northrop Grumman/Sunnyvale</p><p></p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+        <a href="routes/23.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #09BCDC inset;">
+        <div class="number"><p style="color: #09BCDC">23</p></div>
+        <div class="description"><p style="">Stockton - Lodi, Intercity Service</p><p>DTC - Kaiser - Lodi</p>  </div>
+    </div>
+</a>
+</div>
+
+<div class="row route">
+    <a href="routes/315.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #f26f72 inset;">
+        <div class="number"><p style="color: #f26f72">315</p></div>
+        <div class="description"><p style="">DTC - MLK, Limited weekday crosstown</p><p>Amtrak Station</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/345.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #ffb81f inset;">
+        <div class="number"><p style="color: #ffb81f">345</p></div>
+        <div class="description"><p style="">Kermit - Hammer - Kaiser, Limited Service</p><p>Morada - Kaiser - Malls</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/365.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #8fbbe6 inset;">
+        <div class="number"><p style="color: #8fbbe6">365</p></div>
+        <div class="description"><p style="">Kelly - Don - Otto, Limited Service</p><p>Hammer Triangle - Stockton Medical Plaza</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/371.html">
+    <div class="inside-grid" style="box-shadow:0px 0px 0px 1px #7686C2 inset;">
+        <div class="number"><p style="color: #7686C2">371</p></div>
+        <div class="description"><p style="">Malls - Claremont - Holman - Auto</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+
+</div> 
+<!-- carousel page 1 -->
+
+<div class="grid-container">
+
+<div class="row route">
+    <a href="routes/375.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #ca9dc2 inset">
+        <div class="number"><p style="color: #ca9dc2">375</p></div>
+        <div class="description"><p style="">CalWorks - Cherokee - Holman - Morada</p><p>Morada - Holman - Calworks - DTC</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/378.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #FF8000 inset">
+        <div class="number"><p style="color: #FF8000">378</p></div>
+        <div class="description"><p style="">Section - Oro - Malls</p><p>Malls - DTC - Section - Oro</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/385.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #D50D85 inset">
+        <div class="number"><p style="color: #D50D85">385</p></div>
+        <div class="description"><p style="">DTC - Togninali - Arch Road</p><p>Frontage 99 - Boeing</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/40.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #98012e inset">
+        <div class="number"><p style="color: #98012e">40</p></div>
+        <div class="description"><p style="">Metro Express - Pacific Avenue</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/43.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #98012e inset">
+        <div class="number"><p style="color: #98012e">43</p></div>
+        <div class="description"><p style="">Metro Express - Hammer Lane</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/44.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #98012e inset">
+        <div class="number"><p style="color: #98012e">44</p></div>
+        <div class="description"><p style="">Metro Express - Airport Way</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/47.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #98012e inset">
+        <div class="number"><p style="color: #98012e">47</p></div>
+        <div class="description"><p style="">Metro Express - Midtown Corridor</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/49.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #98012e inset">
+        <div class="number"><p style="color: #98012e">49</p></div>
+        <div class="description"><p style="">Metro Express - MLK Corridor</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/510.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #EF3E36 inset">
+        <div class="number"><p style="color: #EF3E36">510</p></div>
+        <div class="description"><p style="">DTC - San Joaquin - El Dorado</p><p>DTC - Amtrak - Honor Farm</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/515.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #C1D72D inset">
+        <div class="number"><p style="color: #C1D72D">515</p></div>
+        <div class="description"><p style="">DTC - Boggs Tract - 8TH</p><p>8th - MLK - DTC</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/520.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #D28417 inset">
+        <div class="number"><p style="color: #D28417">520</p></div>
+        <div class="description"><p style="">DTC - St. Joesph's - Kaiser</p><p>West Lane</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/525.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #BCA5D4 inset">
+        <div class="number"><p style="color: #BCA5D4">525</p></div>
+        <div class="description"><p style="">DTC - Main - Myrtle - Oro</p><p>Limited Service to Franklin H.S.</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/545.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #99005D inset">
+        <div class="number"><p style="color: #99005D">545</p></div>
+        <div class="description"><p style="">Malls - Claremont - Holman - Auto</p><p>Country Club - Mall Transfer Station</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/555.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #619080 inset">
+        <div class="number"><p style="color: #619080">555</p></div>
+        <div class="description"><p style="">Metro Express - MLK Corridor</p><p>DTC - MLK - Weston Ranch</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/560.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #B6BCD4 inset">
+        <div class="number"><p style="color: #B6BCD4">560</p></div>
+        <div class="description"><p style="">DTC - Amtrak - Monte Diablo</p><p>Pixie Woods</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/566.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #d60d8d inset">
+        <div class="number"><p style="color: #d60d8d">566</p></div>
+        <div class="description"><p style="">Hammer Triangle Station - Trinity Parkway</p><p>Thornton - Whistler</p>  </div>
+    </div>
+    </a>
+</div>
+
+</div>
+
+
+<!-- end carousel page 2 -->
+
+
+<div class="grid-container">
+
+<div class="row route">
+    <a href="routes/570.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #706017 inset">
+        <div class="number"><p style="color: #706017">570</p></div>
+        <div class="description"><p style="">Mall Transfer Station - Cortez Park</p><p>Hammertown Kaiser</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/576.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #305591 inset">
+        <div class="number"><p style="color: #305591">576</p></div>
+        <div class="description"><p style="">DTC - Wilson - Alpine/Sanguinetti</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/577.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #008c55 inset">
+        <div class="number"><p style="color: #008c55">577</p></div>
+        <div class="description"><p style="">DTC - Miner - Waterloo</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/578.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #F5C283 inset">
+        <div class="number"><p style="color: #F5C283">578</p></div>
+        <div class="description"><p style="">DTC - Dameron Hospital - Malls</p><p>Limited service to Country Club</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/580.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #f5c283 inset">
+        <div class="number"><p style="color: #f5c283">580</p></div>
+        <div class="description"><p style="">DTC - Section/Oro</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/710.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #532380 inset">
+        <div class="number"><p style="color: #532380">710</p></div>
+        <div class="description"><p style="">DTC - Weston Ranch - County Hospital</p><p>Amtrak Station</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/715.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #fdb813 inset">
+        <div class="number"><p style="color: #fdb813">715</p></div>
+        <div class="description"><p style="">8th - MLK - Airport - Madrid</p><p>Boggs Tract</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/720.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #72a492 inset">
+        <div class="number"><p style="color: #72a492">720</p></div>
+        <div class="description"><p style="">DTC - Wigwam</p><p>Cherokee - DTC</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/723.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #d97b00 inset">
+        <div class="number"><p style="color: #d97b00">723</p></div>
+        <div class="description"><p style="">DTC - Kaiser - Lodi</p><p>Weekend Service</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/725.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #00BCE4 inset">
+        <div class="number"><p style="color: #00BCE4">725</p></div>
+        <div class="description"><p style="">Main - Lincoln</p><p>Weekend Service</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/745.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #cb357e inset">
+        <div class="number"><p style="color: #cb357e">745</p></div>
+        <div class="description"><p style="">Malls - Pershing - Country Club</p><p>Weekend Service</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/797.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #e6498f inset">
+        <div class="number"><p style="color: #e6498f">797</p></div>
+        <div class="description"><p style="">DTC - Section/Oro</p><p>Weekend Service</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/90.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #45ad00 inset">
+        <div class="number"><p style="color: #45ad00">90</p></div>
+        <div class="description"><p style="">Stockton - Lathrop - Tracy</p><p>Limited Service to Delta College</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/91.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #45ad00 inset">
+        <div class="number"><p style="color: #45ad00">91</p></div>
+        <div class="description"><p style="">Stockton - Manteca - Ripon</p><p>Limited Service to Delta College</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/93.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #45ad00 inset">
+        <div class="number"><p style="color: #45ad00">93</p></div>
+        <div class="description"><p style="">Stockton - Lodi</p><p>Delta College - Malls</p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/97.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #09a311 inset">
+        <div class="number"><p style="color: #09a311">97</p></div>
+        <div class="description"><p style="">DTC - Lathrop - Tracy</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+
+</div>
+
+<!-- end carousel page 3 -->
+
+
+<div class="grid-container">
+<div class="row route">
+    <a href="routes/99.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #008000 inset">
+        <div class="number"><p style="color: #008000">99</p></div>
+        <div class="description"><p style="">Mountain House - Tracy Trasit Center - ACE Station</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+<div class="row route">
+    <a href="routes/DIR.html">
+    <div class="inside-grid" style="box-shadow: 0px 0px 0px 1px #008000 inset">
+        <div class="number"><p style="color: #008000">DIR</p></div>
+        <div class="description"><p style="">Direct Connection - Mountain House</p><p></p>  </div>
+    </div>
+    </a>
+</div>
+
+</div>
+
+</div>
+<!-- end carousel -->
+<!-- <div class="owl-carousel owl-theme">
+    <div class="item"><h4>1</h4></div>
+    <div class="item"><h4>2</h4></div>
+    <div class="item"><h4>3</h4></div>
+    <div class="item"><h4>4</h4></div>
+    <div class="item"><h4>5</h4></div>
+    <div class="item"><h4>6</h4></div>
+    <div class="item"><h4>7</h4></div>
+    <div class="item"><h4>8</h4></div>
+    <div class="item"><h4>9</h4></div>
+    <div class="item"><h4>10</h4></div>
+    <div class="item"><h4>11</h4></div>
+    <div class="item"><h4>12</h4></div>
+</div> -->
+
+
+<script type="text/javascript">
+$('.owl-carousel').owlCarousel({
+    loop:true,
+    margin:10,
+    nav:true,
+    navText:["<img class='arrow leftarrow' src='left-arrow.png'>","<img class='arrow rightarrow' src='right-arrow.png'>"],
+    dots:false,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:1
+        },
+        1000:{
+            slideBy: 1,
+            items:1
+        }
+    }
+})
+
+
+</script>
+
+</body>
+</html>
