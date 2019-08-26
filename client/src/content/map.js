@@ -22,7 +22,7 @@ class Map extends Component {
 			maxZoom: 19,
 			maxNativeZoom: 17,
 			id: 'mapbox.streets',
-			accessToken: 'pk.eyJ1IjoibWlraGFlbHJ0ZCIsImEiOiJjanMzdHdpdHAwM2Q3NDRvMW5ueWlpaXh6In0.5QRX579-FSS4GO9VRrNx1A'
+			accessToken: ''
 		}).addTo(this.map);
 		
 		var latlngs = [
